@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二分法とニュートン法シミュレータ</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="bisection.js"></script>
+    <script src="newton.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>二分法とニュートン法シミュレータ</h1>
+
+      <div class="main-content-grid">
+        <div class="left-column">
+          <!-- 方程式選択 -->
+          <div class="section-panel">
+            <h2>1. 方程式の選択</h2>
+            <div class="equation-selection">
+              <label for="equation-select">方程式:</label>
+              <select id="equation-select">
+                <option value="f(x) = x^2 - 2">f(x) = x^2 - 2</option>
+                <option value="f(x) = x^3 - 2x + 2">f(x) = x^3 - 2x + 2</option>
+                <option value="f(x) = cos(x) - x">f(x) = cos(x) - x</option>
+                <option value="f(x) = e^x - 3x">f(x) = e^x - 3x</option>
+              </select>
+              <div id="equation-display"></div>
+            </div>
+          </div>
+
+          <!-- 二分法コントロール -->
+          <div class="section-panel">
+            <h2>2. 二分法</h2>
+            <div class="input-group">
+              <label for="bisection-a">初期区間 a:</label>
+              <input type="number" id="bisection-a" value="0" step="0.1" />
+            </div>
+            <div class="input-group">
+              <label for="bisection-b">初期区間 b:</label>
+              <input type="number" id="bisection-b" value="2" step="0.1" />
+            </div>
+            <div class="input-group">
+              <label for="bisection-tolerance">許容誤差:</label>
+              <input
+                type="number"
+                id="bisection-tolerance"
+                value="0.0001"
+                step="0.00001"
+              />
+            </div>
+            <div class="input-group">
+              <label for="bisection-max-iterations">最大繰り返し回数:</label>
+              <input
+                type="number"
+                id="bisection-max-iterations"
+                value="100"
+                step="1"
+              />
+            </div>
+            <div class="button-group">
+              <button id="run-bisection-btn" class="btn btn-primary">
+                二分法を実行
+              </button>
+              <button id="step-bisection-btn" class="btn btn-secondary">
+                ステップ実行
+              </button>
+            </div>
+            <div id="bisection-message" class="message-box hidden"></div>
+          </div>
+
+          <!-- ニュートン法コントロール -->
+          <div class="section-panel">
+            <h2>3. ニュートン法</h2>
+            <div class="input-group">
+              <label for="newton-x0">初期値 x_0:</label>
+              <input type="number" id="newton-x0" value="1.5" step="0.1" />
+            </div>
+            <div class="input-group">
+              <label for="newton-tolerance">許容誤差:</label>
+              <input
+                type="number"
+                id="newton-tolerance"
+                value="0.0001"
+                step="0.00001"
+              />
+            </div>
+            <div class="input-group">
+              <label for="newton-max-iterations">最大繰り返し回数:</label>
+              <input
+                type="number"
+                id="newton-max-iterations"
+                value="100"
+                step="1"
+              />
+            </div>
+            <div class="button-group">
+              <button id="run-newton-btn" class="btn btn-primary">
+                ニュートン法を実行
+              </button>
+              <button id="step-newton-btn" class="btn btn-secondary">
+                ステップ実行
+              </button>
+            </div>
+            <div id="newton-message" class="message-box hidden"></div>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <!-- グラフ表示エリア -->
+          <div class="section-panel">
+            <h2>4. 方程式のグラフ</h2>
+            <canvas id="equation-canvas" width="500" height="333"></canvas>
+            <!-- 初期サイズを調整 -->
+            <div class="button-group" style="justify-content: center">
+              <button id="reset-graph-btn" class="btn btn-secondary">
+                グラフをリセット
+              </button>
+            </div>
+          </div>
+
+          <!-- 結果表示エリア -->
+          <div class="results-grid">
+            <!-- 二分法結果 -->
+            <div class="section-panel">
+              <h2>5. 二分法 結果</h2>
+              <div class="scrollable-results">
+                <table id="bisection-results-table" class="result-table">
+                  <thead>
+                    <tr>
+                      <th>Iteration</th>
+                      <th>a</th>
+                      <th>b</th>
+                      <th>m</th>
+                      <th>f(m)</th>
+                      <th>b-a</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Results will be populated by JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- ニュートン法結果 -->
+            <div class="section-panel">
+              <h2>6. ニュートン法 結果</h2>
+              <div class="scrollable-results">
+                <table id="newton-results-table" class="result-table">
+                  <thead>
+                    <tr>
+                      <th>Iteration</th>
+                      <th>x_k</th>
+                      <th>f(x_k)</th>
+                      <th>f'(x_k)</th>
+                      <th>x_{k+1}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Results will be populated by JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
